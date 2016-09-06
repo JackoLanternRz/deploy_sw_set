@@ -1,0 +1,33 @@
+initialize:
+define total controller
+step 1: go to deploy_sw_set.c ,change #define CTRLNUM <number>, and compile the file again
+	ex. if you have 4 controllers change #define CTRLNUM 3 -> #define CTRLNUM 4
+step 2: modify ctrl_set.txt 
+        add your controller info, use space to separate each controller
+	ex. tcp:192.168.1.10:6633 tcp:192.168.1.11:6633 tcp:192.168.1.12:6633	
+	  ->tcp:192.168.1.10:6633 tcp:192.168.1.11:6633 tcp:192.168.1.12:6633 tcp:192.168.1.20:6633
+
+define switch name in mininet (need to be as same as your topology named your switches)
+step 1: modify sw_set.txt 
+	ex. K4 switch id: s1001 s1002 s1003 s1004 s2001 s2002 s2003 s2004 s2005 s2006 s2007 s2008 s3001 s3002 s3003 s3004 s3005 s3006 s3007 s3008
+	    linear switch id: s1 s2 s3 s4 s5 s6 s7 s8 s9 s10 s11 s12 s13 s14 s15 s16 s17 s18 s19 s20	
+
+define initialize switch-controller mapping:
+step 1: modify set.txt
+	ex. 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+	    2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+
+
+
+To start the app:
+gcc deploy_sw_set.c -o <exe file name>
+sudo <exe file name> <port for load balancing application to link>
+
+
+
+While you're doing the experiment:
+if you want to clean all switch-controller link, run:
+(sudo) sh rmctrl.sh (< remember to chmod this file, add permission)
+
+if you want to change switch-controller link to your setting, modify the inictrl.sh file's controller info, then run:
+(sudo) sh inictrl.sh (< remember to chmod this file, add permission)
